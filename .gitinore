@@ -1,0 +1,20 @@
+# ESP-IDF 编译产物
+build/
+sdkconfig
+sdkconfig.old
+*.bin
+*.elf
+*.map
+flash_args
+
+# Python缓存
+__pycache__/
+*.pyc
+
+# VSCode本地配置
+.vscode/
+
+# 系统垃圾文件
+.DS_Store
+Thumbs.db
+

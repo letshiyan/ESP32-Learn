@@ -1,0 +1,4 @@
+#ESP-IDF编译产物
+build/
+sdkconfig
+sdkconfig.old
