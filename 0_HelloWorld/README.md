@@ -1,26 +1,3 @@
-# _Sample project_
-
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
-
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
-
-
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
-
 ```
 ├── CMakeLists.txt
 ├── main
@@ -28,5 +5,25 @@ Below is short explanation of remaining files in the project folder.
 │   └── main.c
 └── README.md                  This is the file you are currently reading
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+本项目测试了两个打印组件    
+vTaskDelay(500);    这里的参数单位是系统节拍Tick
+ESP32默认  1Tick = 10 ms, 所以这里是延时了 500 $\times$ 10 ms = 5000 ms 也就是 5 秒
+FreeRTOS 内核每隔固定时间触发一次**Tick 中断**，每触发 1 次 = 1 个 Tick
+真实时间 == (1秒 / configTICK_RATE_HZ) * x
+1 / 1000 * 500 = 0.5 s == 500 ms
+
+SDK配置:
+    配置时钟节拍:
+        Freertos --> Kernel --> configTICK_RATE_HZ : 1000
+    配置封装外Flash:
+        Serial flasher config --> Flash SPI mode: QIO , Flash SPI speed: 80MHz , Flash size: 16MB
+    配置封装内PSRAM:
+        ESP PSRAM --> Mode (QUAD/OCT) of SPI RAM chip in use: Qctal Mode PSRAM , Set RAM clock speed: 80
+    ESP32系统配置(主频):
+        ESP System Settings: 240
+
+
+
+
+    
